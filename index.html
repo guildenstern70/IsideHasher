@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Iside Hasher</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<section class="section">
+    <div class="container">
+        <h1 class="title">
+            Iside Hasher
+        </h1>
+        <p class="subtitle">
+            File Hasher (MD5, SHA-x, WHIRLPOOL)
+        </p>
+        <form class="fileform">
+            <div class="columns">
+                <div class="column is-three-quarters">
+                    <input id="filepathcontrol" class="input is-primary" type="text" placeholder="File path...">
+                </div>
+                <div class="column">
+                    <div class="file">
+                        <label class="file-label">
+                            <input id="fileinputcontrol" class="file-input" type="file"
+                                   name="fileinputcontrol">
+                            <span class="file-cta">
+                               <span class="file-icon">
+                                <i class="fas fa-upload"></i>
+                              </span>
+                              <span class="file-label">
+                                Choose a file…
+                              </span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="column">&nbsp;</div>
+            </div>
+        </form>
+
+        <div class="buttons">
+            <button class="button is-primary">Compute Hash</button>
+            <button class="button is-link">Quit</button>
+        </div>
+    </div>
+</section>
+<script src="./renderer.js"></script>
+</body>
+</html>
