@@ -1,3 +1,11 @@
+/*
+ * Iside Hasher
+ * Copyright (c) 2021 Alessio Saltarin
+ * This software is licensed under the Creative Commons license.
+ * See LICENSE.md
+ *
+ */
+
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
@@ -7,6 +15,7 @@ function createWindow () {
     const mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
+        contextIsolation: true,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         }
@@ -39,5 +48,7 @@ app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') app.quit()
 })
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+// Quit when signal 'close-me'
+app.on('close-me', (evt, arg) => {
+    app.quit()
+})

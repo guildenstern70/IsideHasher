@@ -1,3 +1,11 @@
+<!--
+  ~ Iside Hasher
+  ~ Copyright (c) 2021 Alessio Saltarin
+  ~ This software is licensed under the Creative Commons license.
+  ~ See LICENSE.md
+  ~
+  -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +28,8 @@
         <form class="fileform">
             <div class="columns">
                 <div class="column is-three-quarters">
-                    <input id="filepathcontrol" class="input is-primary" type="text" placeholder="File path...">
+                    <input id="filepathcontrol"
+                           class="input is-primary" type="text" placeholder="File path..." readonly>
                 </div>
                 <div class="column">
                     <div class="file">
@@ -43,8 +52,8 @@
         </form>
 
         <div class="buttons">
-            <button class="button is-primary">Compute Hash</button>
-            <button class="button is-link">Quit</button>
+            <button id="computehash" class="button is-primary">Compute Hash</button>
+            <button id="quitme" class="button is-link">Quit</button>
         </div>
     </div>
 </section>
