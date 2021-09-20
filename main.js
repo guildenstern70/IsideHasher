@@ -15,6 +15,7 @@ function createWindow () {
     const mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
+        nativeWindowOpen: true,
         contextIsolation: true,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
@@ -48,7 +49,8 @@ app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') app.quit()
 })
 
-// Quit when signal 'close-me'
-app.on('close-me', (evt, arg) => {
-    app.quit()
+
+app.on('do-a-thing', function() {
+    console.log("Doing a thing");
+    app.quit();
 })

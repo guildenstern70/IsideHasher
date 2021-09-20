@@ -7,8 +7,18 @@
  */
 
 const { contextBridge, ipcRenderer } = require('electron')
+const { dialog } = require('electron')
 
-contextBridge.exposeInMainWorld('myAPI', {
-    quitMe: () => ipcRenderer.invoke('close-me')
-})
+contextBridge.exposeInMainWorld(
+    'electron',
+    {
+        doThing: () => ipcRenderer.send('do-a-thing'),
+        openDialog: () => {
+            console.log("Preload: open dialog");
+            dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] });
+        }
+    }
+)
+
+
 

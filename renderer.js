@@ -6,26 +6,30 @@
  *
  */
 
-const handleFiles = () => {
-    console.log("Changed file value")
-    const filePathInput = document.getElementById("filepathcontrol");
-    const selectedFile = this.files[0];
-    console.log("File chosen: " + selectedFile.path);
-    filePathInput.value = selectedFile.path;
-}
-
-const quit = (e) => {
-    console.log("Quit me");
-    window.close();  // When all windows are closed, the app quits
-}
 
 (function() {
 
     const fileInput = document.getElementById("fileinputcontrol");
     const closeApp = document.getElementById('quitme');
+    const fileHash = document.getElementById('computehash');
 
-    fileInput.addEventListener("change", handleFiles, false);
-    closeApp.addEventListener('click', quit);
+    fileInput.addEventListener("change", function() {
+        console.log("Changed file value")
+        const filePathInput = document.getElementById("filepathcontrol");
+        const selectedFile = this.files[0];
+        console.log("File chosen: " + selectedFile.path);
+        filePathInput.value = selectedFile.path;
+    }, false);
+
+    closeApp.addEventListener('click', () => {
+        console.log("Clicked QUIT");
+        window.electron.doThing();
+    });
+
+    fileHash.addEventListener('click', () => {
+        console.log("Clicked HASH ME");
+        window.electron.openDialog();
+    })
 
 })();
 
