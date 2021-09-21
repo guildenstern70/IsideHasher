@@ -16,5 +16,9 @@ Use the packaged version, you can find here: [TO DO]
 
     yarn run start
 
+## How to distribute
+
+This app uses [Electron Builder](https://github.com/electron-userland/electron-builder) to build distribution packages.
+
 
 

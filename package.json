@@ -1,11 +1,13 @@
 {
   "name": "iside-hasher",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A simple file hashing tool. Supports MD5, SHA256",
   "license": "CC0-1.0",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "repository": "https://github.com/guildenstern70/IsideHasher",
   "keywords": [
@@ -17,9 +19,16 @@
   ],
   "author": "Alessio Saltarin",
   "devDependencies": {
-    "electron": "^14.0.0"
+    "electron": "^14.0.0",
+    "electron-builder": "^22.11.7"
   },
   "dependencies": {
     "electron-context-menu": "^3.1.1"
+  },
+  "build": {
+    "appId": "net.littlelite.iside.electron",
+    "mac": {
+      "category": "public.app-category.utilities"
+    }
   }
 }
