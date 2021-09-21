@@ -52,9 +52,12 @@
         </form>
 
         <div class="buttons">
-            <button id="computehash" class="button is-primary">Compute Hash</button>
+            <button id="computehash" class="button is-primary" disabled>Compute Hash</button>
             <button id="quitme" class="button is-link">Quit</button>
         </div>
+
+        <textarea id="hashdisplay" class="textarea is-primary" placeholder="Hash code" readonly></textarea>
+
     </div>
 </section>
 <script src="./renderer.js"></script>

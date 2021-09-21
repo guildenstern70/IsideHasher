@@ -13,22 +13,25 @@
     const closeApp = document.getElementById('quitme');
     const fileHash = document.getElementById('computehash');
     const filePathInput = document.getElementById("filepathcontrol");
+    const hashArea = document.getElementById("hashdisplay");
 
     fileInput.addEventListener("change", function() {
         console.log("Changed file value")
         const selectedFile = this.files[0];
         console.log("File chosen: " + selectedFile.path);
+        fileHash.removeAttribute('disabled');
         filePathInput.value = selectedFile.path;
     }, false);
 
     closeApp.addEventListener('click', () => {
         console.log("Clicked QUIT");
-        window.electron.doThing();
+        window.close();
     });
 
     fileHash.addEventListener('click', () => {
         console.log("Clicked HASH ME");
-        window.electron.computeHash(filePathInput.value);
+        const hashValue = window.electron.computeHash(filePathInput.value);
+        hashArea.value = hashValue;
     })
 
 })();

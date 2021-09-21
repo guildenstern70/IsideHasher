@@ -11,13 +11,9 @@ const { contextBridge, ipcRenderer } = require('electron')
 contextBridge.exposeInMainWorld(
     'electron',
     {
-        doThing: () => {
-            console.log("Preload: do thing");
-            ipcRenderer.send('do-a-thing');
-        },
         computeHash: (filePath) => {
             console.log("Preload: compute hash of file " + filePath);
-            ipcRenderer.sendSync('compute-hash', filePath);
+            return ipcRenderer.sendSync('compute-hash', filePath);
         },
     }
 )

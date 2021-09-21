@@ -6,12 +6,15 @@
  *
  */
 
-// Modules to control application life and create native browser window
-const { app, BrowserWindow, dialog, ipcMain } = require('electron')
-const path = require('path')
+const { app, BrowserWindow, dialog, ipcMain } = require('electron');
+const path = require('path');
+const fs = require('fs');
+const crypto = require('crypto');
+
+const CHUNK_SIZE = 100 * 1024; // 100kb
 
 function createWindow () {
-    // Create the browser window.
+
     const mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
@@ -22,17 +25,49 @@ function createWindow () {
         }
     })
 
-    // and load the index.html of the app.
     mainWindow.loadFile('index.html')
 
-    // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
 }
 
-function openDialog()
-{
-    console.log(dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] }));
+
+function readFileInChunks(ipcEvent, filePath) {
+
+    const buffer = Buffer.alloc(CHUNK_SIZE);
+    const hasher = crypto.createHash('md5');
+    let data;
+    let bytesReadSoFar = 0;
+    fs.open(filePath, 'r', function(err, fd) {
+        if (err) throw err;
+        function readNextChunk() {
+            fs.read(fd, buffer, 0, CHUNK_SIZE,
+                null, function(err, nread) {
+                if (err) throw err;
+
+                if (nread === 0) {
+                    fs.close(fd, function(err) {
+                        if (err) throw err;
+                    });
+                    const hashvalue = hasher.digest('hex');
+                    console.log(hashvalue);
+                    ipcEvent.returnValue = hashvalue;
+                    return;
+                }
+
+                if (nread < CHUNK_SIZE)
+                    data = buffer.slice(0, nread);
+                else
+                    data = buffer;
+
+                bytesReadSoFar += data.length;
+                hasher.update(data);
+                readNextChunk();
+
+            });
+        }
+        readNextChunk();
+    });
 }
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -55,13 +90,9 @@ app.whenReady().then(() => {
 
 })
 
-ipcMain.on('do-a-thing', (event, arg) => {
-    console.log('Main: quit');
-    app.quit();
-});
-
-ipcMain.on('compute-hash', (event, arg) => {
+ipcMain.on('compute-hash', (ipcEvent, arg) => {
     console.log('Main: computing hash for ' + arg);
+    readFileInChunks(ipcEvent, arg);
 });
 
 
