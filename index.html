@@ -19,12 +19,13 @@
 <body>
 <section class="section">
     <div class="container">
-        <h1 class="title">
-            Iside Hasher
+        <h1 class="title has-text-link">
+            <b>Iside Hasher</b>
         </h1>
         <p class="subtitle">
             File Hasher (MD5, SHA-x, WHIRLPOOL)
         </p>
+
         <form class="fileform">
             <div class="columns">
                 <div class="column is-three-quarters">
@@ -51,12 +52,15 @@
             </div>
         </form>
 
-        <div class="buttons">
+        <textarea id="hashdisplay"
+                  class="textarea is-primary"
+                  placeholder="Hash code" readonly></textarea>
+
+        <div class="buttons mt-5">
             <button id="computehash" class="button is-primary" disabled>Compute Hash</button>
             <button id="quitme" class="button is-link">Quit</button>
         </div>
 
-        <textarea id="hashdisplay" class="textarea is-primary" placeholder="Hash code" readonly></textarea>
 
     </div>
 </section>

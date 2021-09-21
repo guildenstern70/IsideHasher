@@ -18,5 +18,8 @@
   "author": "Alessio Saltarin",
   "devDependencies": {
     "electron": "^14.0.0"
+  },
+  "dependencies": {
+    "electron-context-menu": "^3.1.1"
   }
 }

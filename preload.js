@@ -17,6 +17,3 @@ contextBridge.exposeInMainWorld(
         },
     }
 )
-
-
-

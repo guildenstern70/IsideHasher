@@ -18,6 +18,7 @@
     fileInput.addEventListener("change", function() {
         console.log("Changed file value")
         const selectedFile = this.files[0];
+        hashArea.value = '';
         console.log("File chosen: " + selectedFile.path);
         fileHash.removeAttribute('disabled');
         filePathInput.value = selectedFile.path;
@@ -30,8 +31,8 @@
 
     fileHash.addEventListener('click', () => {
         console.log("Clicked HASH ME");
-        const hashValue = window.electron.computeHash(filePathInput.value);
-        hashArea.value = hashValue;
+        hashArea.value = window.electron.computeHash(filePathInput.value);
+        fileHash.setAttribute('disabled', 'true');
     })
 
 })();

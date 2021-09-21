@@ -7,25 +7,31 @@
  */
 
 const { app, BrowserWindow, dialog, ipcMain } = require('electron');
+const contextMenu = require('electron-context-menu');
 const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
 
 const CHUNK_SIZE = 100 * 1024; // 100kb
 
+contextMenu({
+    showSaveImageAs: false
+});
+
 function createWindow () {
 
     const mainWindow = new BrowserWindow({
         width: 800,
-        height: 600,
+        height: 500,
+        backgroundColor: '#EEEEEE',
         nativeWindowOpen: true,
         contextIsolation: true,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         }
-    })
+    });
 
-    mainWindow.loadFile('index.html')
+    mainWindow.loadFile('index.html');
 
 }
 
@@ -68,10 +74,6 @@ function readFileInChunks(ipcEvent, filePath) {
     });
 }
 
-
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
 
     console.log("App ready.");
