@@ -12,10 +12,10 @@
     const fileInput = document.getElementById("fileinputcontrol");
     const closeApp = document.getElementById('quitme');
     const fileHash = document.getElementById('computehash');
+    const filePathInput = document.getElementById("filepathcontrol");
 
     fileInput.addEventListener("change", function() {
         console.log("Changed file value")
-        const filePathInput = document.getElementById("filepathcontrol");
         const selectedFile = this.files[0];
         console.log("File chosen: " + selectedFile.path);
         filePathInput.value = selectedFile.path;
@@ -28,7 +28,7 @@
 
     fileHash.addEventListener('click', () => {
         console.log("Clicked HASH ME");
-        window.electron.openDialog();
+        window.electron.computeHash(filePathInput.value);
     })
 
 })();

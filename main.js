@@ -7,7 +7,7 @@
  */
 
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const { app, BrowserWindow, dialog, ipcMain } = require('electron')
 const path = require('path')
 
 function createWindow () {
@@ -29,28 +29,39 @@ function createWindow () {
     // mainWindow.webContents.openDevTools()
 }
 
+function openDialog()
+{
+    console.log(dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] }));
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-    createWindow()
+
+    console.log("App ready.");
+    createWindow();
 
     app.on('activate', function () {
         // On macOS it's common to re-create a window in the app when the
         // dock icon is clicked and there are no other windows open.
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
-    })
+    });
+
+    app.on('window-all-closed', function () {
+        console.log("Main: window-all-closed");
+        app.quit();
+    });
+
 })
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
-app.on('window-all-closed', function () {
-    if (process.platform !== 'darwin') app.quit()
-})
-
-
-app.on('do-a-thing', function() {
-    console.log("Doing a thing");
+ipcMain.on('do-a-thing', (event, arg) => {
+    console.log('Main: quit');
     app.quit();
-})
+});
+
+ipcMain.on('compute-hash', (event, arg) => {
+    console.log('Main: computing hash for ' + arg);
+});
+
+

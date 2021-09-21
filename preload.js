@@ -7,16 +7,18 @@
  */
 
 const { contextBridge, ipcRenderer } = require('electron')
-const { dialog } = require('electron')
 
 contextBridge.exposeInMainWorld(
     'electron',
     {
-        doThing: () => ipcRenderer.send('do-a-thing'),
-        openDialog: () => {
-            console.log("Preload: open dialog");
-            dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] });
-        }
+        doThing: () => {
+            console.log("Preload: do thing");
+            ipcRenderer.send('do-a-thing');
+        },
+        computeHash: (filePath) => {
+            console.log("Preload: compute hash of file " + filePath);
+            ipcRenderer.sendSync('compute-hash', filePath);
+        },
     }
 )
 
