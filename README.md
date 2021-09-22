@@ -1,6 +1,10 @@
 # Iside Hasher
 
-The easy file hasher. It computes any file's hash code using:
+The easy file hasher. 
+
+<img alt="Iside Hasher" src="icons/screenshot.png" width="500">
+
+It computes any file's hash code using:
 
 * MD4
 * MD5
