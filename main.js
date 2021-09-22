@@ -26,6 +26,7 @@ function createWindow () {
         backgroundColor: '#EEEEEE',
         nativeWindowOpen: true,
         contextIsolation: true,
+        icon: path.join(__dirname, '/icons/isidehasher512.png'),
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         }

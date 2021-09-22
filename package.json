@@ -1,7 +1,8 @@
 {
   "name": "iside-hasher",
-  "version": "0.1.1",
-  "description": "A simple file hashing tool. Supports MD5, SHA256",
+  "productName": "IsideHasher",
+  "version": "0.1.2",
+  "description": "A simple file hashing tool. Supports MD4, MD5, SHA1, SHA256, RIPEMD160 and other hash algorithms.",
   "license": "CC0-1.0",
   "main": "main.js",
   "scripts": {
@@ -12,8 +13,13 @@
   "repository": "https://github.com/guildenstern70/IsideHasher",
   "keywords": [
     "hash",
+    "MD4",
     "MD5",
+    "SHA1",
     "SHA256",
+    "SHA384",
+    "SHA512",
+    "RIPEMD160",
     "hashing",
     "message digest"
   ],
