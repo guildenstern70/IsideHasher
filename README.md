@@ -29,11 +29,7 @@ To install Linux version, open a terminal, cd into the directory with the snap i
 
     sudo snap install --dangerous ./iside-hasher_0.1.2_amd64.snap 
 
-## How to run
-
-    yarn run start
-
-## How to distribute
+## Distribution
 
 This app uses [Electron Builder](https://github.com/electron-userland/electron-builder) to build distribution packages.
 
