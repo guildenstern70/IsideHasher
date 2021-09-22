@@ -13,7 +13,13 @@ The easy file hasher. It computes any file's hash code using:
 
 ## How to install or setup
 
-Use the released version, you can find [here](https://github.com/guildenstern70/IsideHasher/releases)
+You can find release details [here](https://github.com/guildenstern70/IsideHasher/releases)
+
+### Version 0.1.2 downloads
+
+- [MacOS](https://github.com/guildenstern70/IsideHasher/releases/download/0.1.2/IsideHasher-0.1.2.dmg)
+- [Windows-Win64](https://github.com/guildenstern70/IsideHasher/releases/download/0.1.2/IsideHasher.Setup.0.1.2.exe)
+
 
 ## How to run
 
