@@ -6,7 +6,7 @@
  *
  */
 
-const { app, BrowserWindow, dialog, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const contextMenu = require('electron-context-menu');
 const path = require('path');
 const fs = require('fs');
@@ -22,7 +22,7 @@ function createWindow () {
 
     const mainWindow = new BrowserWindow({
         width: 800,
-        height: 500,
+        height: 550,
         backgroundColor: '#EEEEEE',
         nativeWindowOpen: true,
         contextIsolation: true,
