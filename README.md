@@ -19,6 +19,7 @@ You can find release details [here](https://github.com/guildenstern70/IsideHashe
 
 - [MacOS](https://github.com/guildenstern70/IsideHasher/releases/download/0.1.2/IsideHasher-0.1.2.dmg) - MD5: 9a2629e13bbf681a9942a802445c7bfb
 - [Windows-Win64](https://github.com/guildenstern70/IsideHasher/releases/download/0.1.2/IsideHasher.Setup.0.1.2.exe) - MD5: a83b8adf975e8caa12cebc9c9925ebcc
+- [Linux-Snap](https://github.com/guildenstern70/IsideHasher/releases/download/0.1.2/iside-hasher_0.1.2_amd64.snap) - MD5: b3a1d6757bf2499e0eb7689a03313565
 
 
 
