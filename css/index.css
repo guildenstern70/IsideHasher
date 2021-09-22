@@ -1,5 +1,5 @@
 /*
- * Iside Hasher
+ * IsideHasher
  * Copyright (c) 2021 Alessio Saltarin
  * This software is licensed under the Creative Commons license.
  * See LICENSE.md

@@ -1,8 +1,8 @@
-# Iside Hasher
+# IsideHasher
 
 The easy file hasher. 
 
-<img alt="Iside Hasher" src="icons/screenshot.png" width="500">
+<img alt="IsideHasher" src="icons/screenshot.png" width="500">
 
 It computes any file's hash code using:
 
