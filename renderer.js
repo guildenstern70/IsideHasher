@@ -21,7 +21,9 @@
         const selectedFile = this.files[0];
         hashArea.value = '';
         console.log("File chosen: " + selectedFile.path);
-        fileHash.removeAttribute('disabled');
+        if (getSelectedAlgo() !== '-') {
+            fileHash.removeAttribute('disabled');
+        }
         filePathInput.value = selectedFile.path;
     }, false);
 
@@ -39,12 +41,20 @@
 
     fileHash.addEventListener('click', () => {
         console.log("Clicked HASH ME");
-        const algo = hashAlgorithm.options[hashAlgorithm.selectedIndex].value;
-        hashArea.value = window.electron.computeHash(filePathInput.value, algo);
-        fileHash.setAttribute('disabled', 'true');
-    })
+        const algo = getSelectedAlgo();
+        if (algo !== '-') {
+            hashArea.value = window.electron.computeHash(filePathInput.value, algo);
+            fileHash.setAttribute('disabled', 'true');
+        }
+    });
+
+    const getSelectedAlgo = () => {
+        return hashAlgorithm.options[hashAlgorithm.selectedIndex].value;
+    }
 
 })();
+
+
 
 
 
