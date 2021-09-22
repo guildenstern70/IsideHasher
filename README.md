@@ -2,15 +2,18 @@
 
 The easy file hasher. It computes any file's hash code using:
 
+* MD4
 * MD5
+* RIPEMD160
 * SHA-1
-* SHA-2
+* SHA-224
 * SHA-256
-* WHIRLPOOL
+* SHA-384
+* SHA-512
 
-## How to setup
+## How to install or setup
 
-Use the packaged version, you can find here: [TO DO]
+Use the released version, you can find [here](https://github.com/guildenstern70/IsideHasher/releases)
 
 ## How to run
 
