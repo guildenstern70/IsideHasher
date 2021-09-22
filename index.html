@@ -19,12 +19,35 @@
 <body>
 <section class="section">
     <div class="container">
-        <h1 class="title has-text-link">
-            <b>Iside Hasher</b>
-        </h1>
-        <p class="subtitle">
-            File Hasher (MD5, SHA-x, WHIRLPOOL)
-        </p>
+
+        <div class="columns">
+            <div class="column is-three-quarters">
+                <h1 class="title has-text-link">
+                    <b>Iside Hasher</b>
+                </h1>
+                <p class="subtitle">
+                    File Hasher (MDx, SHAx, RIPEMD160)
+                </p>
+            </div>
+            <div class="column">
+                <div class="select is-primary">
+                    <select id="hashalgorithm">
+                        <option value="-">Select algorithm</option>
+                        <option value="md4">MD4</option>
+                        <option value="md5">MD5</option>
+                        <option value="ripemd160">RIPEMD160</option>
+                        <option value="sha1">SHA1</option>
+                        <option value="sha224">SHA224</option>
+                        <option value="sha256">SHA256</option>
+                        <option value="sha384">SHA384</option>
+                        <option value="sha512">SHA512</option>
+                    </select>
+                </div>
+            </div>
+            <div class="column">
+
+            </div>
+        </div>
 
         <form class="fileform">
             <div class="columns">

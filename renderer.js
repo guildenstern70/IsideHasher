@@ -14,8 +14,9 @@
     const fileHash = document.getElementById('computehash');
     const filePathInput = document.getElementById("filepathcontrol");
     const hashArea = document.getElementById("hashdisplay");
+    const hashAlgorithm = document.getElementById("hashalgorithm");
 
-    fileInput.addEventListener("change", function() {
+    fileInput.addEventListener('change', function() {
         console.log("Changed file value")
         const selectedFile = this.files[0];
         hashArea.value = '';
@@ -24,6 +25,13 @@
         filePathInput.value = selectedFile.path;
     }, false);
 
+    hashAlgorithm.addEventListener('change', () => {
+        hashArea.value = '';
+        if (fileInput.value !== '') {
+            fileHash.removeAttribute('disabled');
+        }
+    })
+
     closeApp.addEventListener('click', () => {
         console.log("Clicked QUIT");
         window.close();
@@ -31,7 +39,8 @@
 
     fileHash.addEventListener('click', () => {
         console.log("Clicked HASH ME");
-        hashArea.value = window.electron.computeHash(filePathInput.value);
+        const algo = hashAlgorithm.options[hashAlgorithm.selectedIndex].value;
+        hashArea.value = window.electron.computeHash(filePathInput.value, algo);
         fileHash.setAttribute('disabled', 'true');
     })
 

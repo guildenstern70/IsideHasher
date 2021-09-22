@@ -36,10 +36,10 @@ function createWindow () {
 }
 
 
-function readFileInChunks(ipcEvent, filePath) {
+function computeHash(ipcEvent, filePath, algo) {
 
     const buffer = Buffer.alloc(CHUNK_SIZE);
-    const hasher = crypto.createHash('md5');
+    const hasher = crypto.createHash(algo);
     let data;
     let bytesReadSoFar = 0;
     fs.open(filePath, 'r', function(err, fd) {
@@ -92,9 +92,9 @@ app.whenReady().then(() => {
 
 })
 
-ipcMain.on('compute-hash', (ipcEvent, arg) => {
-    console.log('Main: computing hash for ' + arg);
-    readFileInChunks(ipcEvent, arg);
+ipcMain.on('compute-hash', (ipcEvent, filepath, algo) => {
+    console.log('Main: computing hash for ' + filepath + " (" + algo + ")");
+    computeHash(ipcEvent, filepath, algo);
 });
 
 
