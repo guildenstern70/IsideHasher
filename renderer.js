@@ -9,12 +9,31 @@
 
 (function() {
 
+    let hashmode = 'file';
+
     const fileInput = document.getElementById("fileinputcontrol");
     const closeApp = document.getElementById('quitme');
-    const fileHash = document.getElementById('computehash');
+    const computeHash = document.getElementById('computehash');
     const filePathInput = document.getElementById("filepathcontrol");
     const hashArea = document.getElementById("hashdisplay");
     const hashAlgorithm = document.getElementById("hashalgorithm");
+    const textmode = document.getElementById("textmode");
+    const filemode = document.getElementById("filemode");
+    const selectmode = document.getElementById("hashmode");
+    const text2Hash = document.getElementById("text2hash");
+
+    selectmode.addEventListener('change', function() {
+        if (selectmode.value === 'text') {
+            hashmode = 'text';
+            textmode.classList.remove("is-hidden");
+            filemode.classList.add("is-hidden");
+            computeHash.removeAttribute('disabled');
+        } else {
+            filemode.classList.remove("is-hidden");
+            textmode.classList.add("is-hidden");
+        }
+        hashArea.value = "";
+    });
 
     fileInput.addEventListener('change', function() {
         console.log("Changed file value")
@@ -22,7 +41,7 @@
         hashArea.value = '';
         console.log("File chosen: " + selectedFile.path);
         if (getSelectedAlgo() !== '-') {
-            fileHash.removeAttribute('disabled');
+            computeHash.removeAttribute('disabled');
         }
         filePathInput.value = selectedFile.path;
     }, false);
@@ -30,7 +49,7 @@
     hashAlgorithm.addEventListener('change', () => {
         hashArea.value = '';
         if (fileInput.value !== '') {
-            fileHash.removeAttribute('disabled');
+            computeHash.removeAttribute('disabled');
         }
     })
 
@@ -39,12 +58,16 @@
         window.close();
     });
 
-    fileHash.addEventListener('click', () => {
-        console.log("Clicked HASH ME");
+    computeHash.addEventListener('click', () => {
+        console.log("Clicked HASH ME. Hashmode = " + hashmode);
         const algo = getSelectedAlgo();
         if (algo !== '-') {
-            hashArea.value = window.electron.computeHash(filePathInput.value, algo);
-            fileHash.setAttribute('disabled', 'true');
+            if (hashmode === 'file') {
+                hashArea.value = window.electron.computeFileHash(filePathInput.value, algo);
+                computeHash.setAttribute('disabled', 'true');
+            } else {
+                hashArea.value = window.electron.computeTextHash(text2Hash.value, algo);
+            }
         }
     });
 

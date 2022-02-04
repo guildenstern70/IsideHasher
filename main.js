@@ -36,8 +36,23 @@ function createWindow () {
 
 }
 
+function computeTextHash(ipcEvent, text, algo) {
+    let digest = "";
 
-function computeHash(ipcEvent, filePath, algo) {
+    if (text.length > 0) {
+        console.log('Hashing text => ' + text);
+        const hasher = crypto.createHash(algo);
+        digest = hasher.update(text).digest('hex');
+        console.log(digest);
+    } else {
+        console.log('Empty text');
+    }
+
+    ipcEvent.returnValue = digest;
+
+}
+
+function computeFileHash(ipcEvent, filePath, algo) {
 
     const buffer = Buffer.alloc(CHUNK_SIZE);
     const hasher = crypto.createHash(algo);
@@ -93,9 +108,14 @@ app.whenReady().then(() => {
 
 })
 
-ipcMain.on('compute-hash', (ipcEvent, filepath, algo) => {
+ipcMain.on('compute-file-hash', (ipcEvent, filepath, algo) => {
     console.log('Main: computing hash for ' + filepath + " (" + algo + ")");
-    computeHash(ipcEvent, filepath, algo);
+    computeFileHash(ipcEvent, filepath, algo);
+});
+
+ipcMain.on('compute-text-hash', (ipcEvent, text, algo) => {
+    console.log('Main: computing text hash for ' + text + " (" + algo + ")");
+    computeTextHash(ipcEvent, text, algo);
 });
 
 
