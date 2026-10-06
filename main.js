@@ -6,12 +6,13 @@
  *
  */
 
-const { app, BrowserWindow, ipcMain, clipboard } = require('electron');
+const { app, BrowserWindow, ipcMain, clipboard, shell } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
 
 const CHUNK_SIZE = 100 * 1024; // 100kb
+const PROJECT_URL = 'https://github.com/guildenstern70/IsideHasher';
 
 // electron-context-menu (v4+) is an ES module: load it with dynamic import()
 const contextMenuReady = import('electron-context-menu').then(({ default: contextMenu }) => {
@@ -123,6 +124,14 @@ ipcMain.on('compute-text-hash', (ipcEvent, text, algo) => {
 ipcMain.handle('copy-to-clipboard', (ipcEvent, text) => {
     console.log('Main: copying to clipboard => ' + text);
     clipboard.writeText(String(text));
+});
+
+ipcMain.handle('get-app-version', () => {
+    return app.getVersion();
+});
+
+ipcMain.handle('open-project-page', () => {
+    return shell.openExternal(PROJECT_URL);
 });
 
 

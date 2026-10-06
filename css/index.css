@@ -19,3 +19,7 @@ body {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+.about-card {
+  max-width: 400px;
+}

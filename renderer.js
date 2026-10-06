@@ -106,6 +106,39 @@
         return hashAlgorithm.options[hashAlgorithm.selectedIndex].value;
     }
 
+    const aboutButton = document.getElementById("aboutbutton");
+    const aboutModal = document.getElementById("aboutmodal");
+    const aboutVersion = document.getElementById("aboutversion");
+    const aboutOk = document.getElementById("aboutok");
+    const aboutGitHub = document.getElementById("aboutgithub");
+
+    const closeAbout = () => {
+        aboutModal.classList.remove('is-active');
+    };
+
+    aboutButton.addEventListener('click', async () => {
+        try {
+            aboutVersion.textContent = await window.electron.getAppVersion();
+        } catch (err) {
+            console.error('Cannot read app version: ' + err);
+        }
+        aboutModal.classList.add('is-active');
+        aboutOk.focus();
+    });
+
+    aboutOk.addEventListener('click', closeAbout);
+    aboutModal.querySelector('.modal-background').addEventListener('click', closeAbout);
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closeAbout();
+        }
+    });
+
+    aboutGitHub.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.electron.openProjectPage();
+    });
+
 })();
 
 

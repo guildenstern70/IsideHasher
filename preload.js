@@ -26,5 +26,11 @@ contextBridge.exposeInMainWorld(
             copyToClipboard: (text) => {
                 return ipcRenderer.invoke('copy-to-clipboard', text);
             },
+            getAppVersion: () => {
+                return ipcRenderer.invoke('get-app-version');
+            },
+            openProjectPage: () => {
+                return ipcRenderer.invoke('open-project-page');
+            },
         }
 )

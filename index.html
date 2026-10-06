@@ -106,11 +106,32 @@
                 <span id="copyhashlabel">Copy Hash</span>
             </button>
             <button id="quitme" class="button is-link">Quit</button>
+            <button id="aboutbutton" class="button is-small is-light ml-auto" title="About">
+                <span class="icon"><i class="fas fa-info-circle"></i></span>
+                <span>About</span>
+            </button>
         </div>
 
 
     </div>
 </section>
+
+<div id="aboutmodal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card about-card">
+        <section class="modal-card-body has-text-centered">
+            <p class="title is-4 has-text-link">Iside Hasher</p>
+            <p class="subtitle is-6">v.<span id="aboutversion"></span></p>
+            <p>by LittleLite Software</p>
+            <p class="mt-2">
+                GitHub: <a id="aboutgithub" href="#">https://github.com/guildenstern70/IsideHasher</a>
+            </p>
+        </section>
+        <footer class="modal-card-foot is-justify-content-center">
+            <button id="aboutok" class="button is-primary">OK</button>
+        </footer>
+    </div>
+</div>
 <script src="./renderer.js"></script>
 </body>
 </html>
