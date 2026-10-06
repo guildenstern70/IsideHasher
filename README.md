@@ -94,7 +94,14 @@ This app uses [Electron Builder](https://github.com/electron-userland/electron-b
 | `index.html`  | Main window markup                                                         |
 | `css/`        | Stylesheets                                                                |
 | `icons/`      | Application icons and screenshot                                           |
+| `vendor/`     | Bundled third-party assets (Bulma 0.9.3, Font Awesome Free 5.15.4 solid)   |
+
+The app does not load anything from CDNs or the network: all stylesheets and fonts are
+bundled locally under `vendor/`.
 
 ## License
 
 Released under the [ISC](LICENSE) license.
+
+Bundled third-party assets keep their own licenses: [Bulma](vendor/bulma/LICENSE) (MIT) and
+[Font Awesome Free](vendor/fontawesome/LICENSE.txt) (icons CC BY 4.0, fonts SIL OFL 1.1, code MIT).

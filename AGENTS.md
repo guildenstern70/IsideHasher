@@ -38,9 +38,10 @@ available, by running `yarn start`. If the Electron binary is missing, run
 | `main.js`     | Main process: creates the `BrowserWindow`, registers IPC handlers, hashes via `crypto` |
 | `preload.js`  | Exposes `window.electron` to the renderer through `contextBridge`                      |
 | `renderer.js` | UI logic (IIFE, vanilla DOM APIs) for `index.html`                                     |
-| `index.html`  | Window markup; uses Bulma and Font Awesome from CDNs                                   |
+| `index.html`  | Window markup; uses Bulma and Font Awesome from `vendor/` (no CDNs)                    |
 | `css/`        | Custom styles                                                                          |
 | `icons/`      | App icons and README screenshot                                                        |
+| `vendor/`     | Bundled third-party CSS and fonts (Bulma 0.9.3, Font Awesome Free 5.15.4 solid)        |
 
 Data flow: `renderer.js` → `window.electron.*` (`preload.js`) → `ipcRenderer.sendSync(...)` →
 `ipcMain.on(...)` in `main.js` → result returned via `ipcEvent.returnValue`.
@@ -88,6 +89,9 @@ IPC channels:
   "This software is licensed under the ISC license."
 - Keep DOM element IDs in `index.html` and `renderer.js` in sync.
 - UI uses Bulma classes (e.g. `is-hidden`, `is-primary`); prefer Bulma utilities over custom CSS.
+- Do not load resources from CDNs or the network. Bundle third-party CSS/fonts under `vendor/`
+  (with their license files) and keep the `Content-Security-Policy` meta (`default-src 'self'`)
+  in `index.html`.
 
 ### Dependencies
 
