@@ -1,21 +1,23 @@
 /*
  * IsideHasher
  * Copyright (c) 2021 Alessio Saltarin
- * This software is licensed under the Creative Commons license.
- * See LICENSE.md
+ * This software is licensed under the ISC license.
+ * See LICENSE
  *
  */
 
 const { app, BrowserWindow, ipcMain } = require('electron');
-const contextMenu = require('electron-context-menu');
 const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
 
 const CHUNK_SIZE = 100 * 1024; // 100kb
 
-contextMenu({
-    showSaveImageAs: false
+// electron-context-menu (v4+) is an ES module: load it with dynamic import()
+const contextMenuReady = import('electron-context-menu').then(({ default: contextMenu }) => {
+    contextMenu({
+        showSaveImageAs: false
+    });
 });
 
 function createWindow () {
@@ -24,10 +26,9 @@ function createWindow () {
         width: 800,
         height: 550,
         backgroundColor: '#EEEEEE',
-        nativeWindowOpen: true,
-        contextIsolation: true,
         icon: path.join(__dirname, '/icons/isidehasher512.png'),
         webPreferences: {
+            contextIsolation: true,
             preload: path.join(__dirname, 'preload.js')
         }
     });
@@ -76,7 +77,7 @@ function computeFileHash(ipcEvent, filePath, algo) {
                 }
 
                 if (nread < CHUNK_SIZE)
-                    data = buffer.slice(0, nread);
+                    data = buffer.subarray(0, nread);
                 else
                     data = buffer;
 
@@ -90,8 +91,9 @@ function computeFileHash(ipcEvent, filePath, algo) {
     });
 }
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
 
+    await contextMenuReady;
     console.log("App ready.");
     createWindow();
 
