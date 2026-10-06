@@ -21,6 +21,19 @@
     const filemode = document.getElementById("filemode");
     const selectmode = document.getElementById("hashmode");
     const text2Hash = document.getElementById("text2hash");
+    const copyHash = document.getElementById("copyhash");
+    const copyHashLabel = document.getElementById("copyhashlabel");
+
+    let copyFeedbackTimer = null;
+
+    const setHash = (value) => {
+        hashArea.value = value || '';
+        if (hashArea.value !== '') {
+            copyHash.removeAttribute('disabled');
+        } else {
+            copyHash.setAttribute('disabled', 'true');
+        }
+    };
 
     selectmode.addEventListener('change', function() {
         if (selectmode.value === 'text') {
@@ -32,14 +45,14 @@
             filemode.classList.remove("is-hidden");
             textmode.classList.add("is-hidden");
         }
-        hashArea.value = "";
+        setHash('');
     });
 
     fileInput.addEventListener('change', function() {
         console.log("Changed file value")
         const selectedFile = this.files[0];
         const selectedFilePath = window.electron.getPathForFile(selectedFile);
-        hashArea.value = '';
+        setHash('');
         console.log("File chosen: " + selectedFilePath);
         if (getSelectedAlgo() !== '-') {
             computeHash.removeAttribute('disabled');
@@ -48,7 +61,7 @@
     }, false);
 
     hashAlgorithm.addEventListener('change', () => {
-        hashArea.value = '';
+        setHash('');
         if (fileInput.value !== '') {
             computeHash.removeAttribute('disabled');
         }
@@ -64,12 +77,29 @@
         const algo = getSelectedAlgo();
         if (algo !== '-') {
             if (hashmode === 'file') {
-                hashArea.value = window.electron.computeFileHash(filePathInput.value, algo);
+                setHash(window.electron.computeFileHash(filePathInput.value, algo));
                 computeHash.setAttribute('disabled', 'true');
             } else {
-                hashArea.value = window.electron.computeTextHash(text2Hash.value, algo);
+                setHash(window.electron.computeTextHash(text2Hash.value, algo));
             }
         }
+    });
+
+    copyHash.addEventListener('click', async () => {
+        if (hashArea.value === '') {
+            return;
+        }
+        try {
+            await window.electron.copyToClipboard(hashArea.value);
+            copyHashLabel.textContent = 'Copied!';
+        } catch (err) {
+            console.error('Copy to clipboard failed: ' + err);
+            copyHashLabel.textContent = 'Copy failed';
+        }
+        clearTimeout(copyFeedbackTimer);
+        copyFeedbackTimer = setTimeout(() => {
+            copyHashLabel.textContent = 'Copy Hash';
+        }, 1500);
     });
 
     const getSelectedAlgo = () => {

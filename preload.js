@@ -23,5 +23,8 @@ contextBridge.exposeInMainWorld(
                 console.log("Preload: compute hash of text " + text + " with algo: " + algorithm);
                 return ipcRenderer.sendSync('compute-text-hash', text, algorithm);
             },
+            copyToClipboard: (text) => {
+                return ipcRenderer.invoke('copy-to-clipboard', text);
+            },
         }
 )

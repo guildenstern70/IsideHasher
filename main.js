@@ -6,7 +6,7 @@
  *
  */
 
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, clipboard } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
@@ -118,6 +118,11 @@ ipcMain.on('compute-file-hash', (ipcEvent, filepath, algo) => {
 ipcMain.on('compute-text-hash', (ipcEvent, text, algo) => {
     console.log('Main: computing text hash for ' + text + " (" + algo + ")");
     computeTextHash(ipcEvent, text, algo);
+});
+
+ipcMain.handle('copy-to-clipboard', (ipcEvent, text) => {
+    console.log('Main: copying to clipboard => ' + text);
+    clipboard.writeText(String(text));
 });
 
 
