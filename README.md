@@ -74,6 +74,9 @@ This app uses [Electron Builder](https://github.com/electron-userland/electron-b
 | `yarn pack` | Builds an unpacked app in `dist/` (useful for quick testing)        |
 | `yarn dist` | Builds installable packages for the current platform in `dist/`     |
 
+For detailed instructions on packaging images for macOS, Windows, and Linux, and uploading them as GitHub Releases, see [DEPLOY.md](DEPLOY.md).
+
+
 ## Troubleshooting
 
 * **`Electron failed to install correctly` / missing Electron binary** – the Electron postinstall
